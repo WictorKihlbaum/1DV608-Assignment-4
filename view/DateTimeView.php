@@ -2,7 +2,6 @@
 
 class DateTimeView {
 
-
 	public function show() {
 		// Set correct timezone.
 		date_default_timezone_set('Europe/Stockholm');

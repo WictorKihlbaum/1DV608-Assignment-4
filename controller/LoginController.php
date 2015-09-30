@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: wk222as
- * Date: 2015-09-23
- * Time: 12:23
- */
 class LoginController {
 
     private $loginView;
@@ -19,12 +13,12 @@ class LoginController {
     }
     
     public function verifyUserState() {
-        // If user's not already logged in - log in user.
+        // If user's not already logged in - login user.
         if (!$this -> loginModel -> loggedInUser() && 
             $this -> loginView -> didUserPressLogin()) {
               
               $this -> loginUser();
-        // If user pressed logout while logged in - log out user.
+        // If user pressed logout while logged in - logout user.
         } else if ($this -> loginModel -> loggedInUser() && 
                    $this -> loginView -> didUserPressLogout()) {
               
@@ -46,7 +40,7 @@ class LoginController {
                 $this -> loginView -> setLoginFeedbackMessage();
             }
   
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             
             $this -> loginView -> setWrongInputFeedbackMessage();
         }

@@ -2,6 +2,8 @@
 
 class LoginView {
 	
+	private $loginModel;
+	
 	private static $login = 'LoginView::Login';
 	private static $logout = 'LoginView::Logout';
 	private static $name = 'LoginView::UserName';
@@ -11,15 +13,15 @@ class LoginView {
 	private static $keep = 'LoginView::KeepMeLoggedIn';
 	private static $messageId = 'LoginView::Message';
 
+	// '$feedbackMessage' will get one of the below values depending on situation. 
+	private $feedbackMessage = "";
+
 	// Feedback messages.
 	private static $loginMessage = "Welcome";
 	private static $logoutMessage = "Bye bye!";
 	private static $missingUserNameMessage = "Username is missing";
 	private static $missingPasswordMessage = "Password is missing";
 	private static $wrongInputMessage = "Wrong name or password";
-	
-	private $feedbackMessage = "";
-	private $loginModel;
 	
 	
 	public function __construct($loginModel){
@@ -139,9 +141,11 @@ class LoginView {
 		if (isset($_POST[self::$name])) {
 			
 			return $_POST[self::$name];
+			
+		} else {
+			
+			return "";
 		}
-		
-		return "";
 	}
 
 	private function getRequestPassword() {
@@ -149,9 +153,11 @@ class LoginView {
 		if (isset($_POST[self::$name])) {
 			
 			return $_POST[self::$password];
+			
+		} else {
+			
+			return "";
 		}
-		
-		return "";
 	}
 
 	public function reloadPage() {

@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: wk222as
- * Date: 2015-09-23
- * Time: 12:26
- */
 class UserModel {
 
     private $username;

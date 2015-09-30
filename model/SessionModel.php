@@ -1,7 +1,5 @@
 <?php
 
-
-
 class SessionModel {
     
     private static $userSession = "SessionModel::UserSession";

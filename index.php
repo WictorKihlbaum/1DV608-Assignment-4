@@ -6,6 +6,7 @@
 require_once('view/LoginView.php');
 require_once('view/DateTimeView.php');
 require_once('view/LayoutView.php');
+require_once('view/RegistrationView.php');
 
 // Controllers.
 require_once('controller/LoginController.php');
@@ -27,6 +28,7 @@ $loginModel = new LoginModel($sessionModel);
 $v = new LoginView($loginModel);
 $dtv = new DateTimeView();
 $lv = new LayoutView();
+$registrationView = new RegistrationView();
 
 //CREATE OBJECTS OF THE CONTROLLERS
 $loginController = new LoginController($v, $loginModel);
@@ -34,4 +36,4 @@ $loginController = new LoginController($v, $loginModel);
 // Verify whether user is logged in or not.
 $isLoggedIn = $loginController -> verifyUserState();
 // Render page.
-$lv -> render($isLoggedIn, $v, $dtv);
+$lv -> render($isLoggedIn, $v, $dtv, $registrationView);
