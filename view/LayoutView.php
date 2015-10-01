@@ -4,7 +4,8 @@ class LayoutView {
   
   private static $registerUserLink = "LayoutView::RegisterUserLink";
   
-  public function render($isLoggedIn, LoginView $v, DateTimeView $dtv, RegistrationView $registrationView) {
+  
+  public function render($isLoggedIn, LoginView $loginView, DateTimeView $dateTimeView, RegistrationView $registrationView) {
     
     echo '<!DOCTYPE html>
       <html>
@@ -14,13 +15,13 @@ class LayoutView {
         </head>
         <body>
           <h1>Assignment 2</h1>
-          ' . $this -> createRegistrationLink($isLoggedIn) . '
+          ' . $this -> navigationLink() . '
           ' . $this -> renderIsLoggedIn($isLoggedIn) . '
+          ' . $this -> showForm($isLoggedIn, $loginView, $registrationView) . '
           
           <div class="container">
-              ' . $v -> response($isLoggedIn) . '
-              ' . $dtv -> show() . '
-              ' . $registrationView -> generateRegistrationFormHTML() . '
+              
+              ' . $dateTimeView -> showDateTime() . '
           </div>
          </body>
       </html>
@@ -39,17 +40,34 @@ class LayoutView {
     }
   }
   
-  private function createRegistrationLink($isLoggedIn) {
+  // Set correct navigation link and name depending on in which view the user is.
+  private function navigationLink() {
     
-    if (!$isLoggedIn) {
+    if ($_SERVER['QUERY_STRING'] != "registration") {
       
-      return ' <a href="#" name="' . self::$registerUserLink . '">Register a new user</a> ';
+      return ' <a href="/?registration" name="' . self::$registerUserLink . '">Register a new user</a> ';
+
+    } else {
+      
+      return ' <a href="/?">Back</a> ';
     }
   }
-  
-  private function didUserPressRegisterNewUser() {
     
-    return isset($_POST[self::$registerUserLink]);
-  }
+  // Check the url-string and show the correct HTML-form.
+  private function showForm($isLoggedIn, $loginView, $registrationView) {
+    
+    if ($_SERVER['QUERY_STRING'] == "registration") {
+      
+      return $registrationView -> generateRegistrationFormHTML();
   
+    } else {
+      
+      return $loginView -> response($isLoggedIn);
+    }
+  }
+    
 }
+  
+  
+  
+

@@ -25,15 +25,15 @@ $sessionModel = new SessionModel();
 $loginModel = new LoginModel($sessionModel);
 
 //CREATE OBJECTS OF THE VIEWS
-$v = new LoginView($loginModel);
-$dtv = new DateTimeView();
-$lv = new LayoutView();
+$loginView = new LoginView($loginModel);
+$dateTimeView = new DateTimeView();
+$layoutView = new LayoutView();
 $registrationView = new RegistrationView();
 
 //CREATE OBJECTS OF THE CONTROLLERS
-$loginController = new LoginController($v, $loginModel);
+$loginController = new LoginController($loginView, $loginModel);
 
 // Verify whether user is logged in or not.
 $isLoggedIn = $loginController -> verifyUserState();
 // Render page.
-$lv -> render($isLoggedIn, $v, $dtv, $registrationView);
+$layoutView -> render($isLoggedIn, $loginView, $dateTimeView, $registrationView);
