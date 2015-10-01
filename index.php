@@ -10,6 +10,7 @@ require_once('view/RegistrationView.php');
 
 // Controllers.
 require_once('controller/LoginController.php');
+require_once('controller/RegistrationController.php');
 
 // Models.
 require_once('model/LoginModel.php');
@@ -32,8 +33,11 @@ $registrationView = new RegistrationView();
 
 //CREATE OBJECTS OF THE CONTROLLERS
 $loginController = new LoginController($loginView, $loginModel);
+$registrationController = new RegistrationController($registrationView);
 
 // Verify whether user is logged in or not.
 $isLoggedIn = $loginController -> verifyUserState();
+$registrationController -> registrateUser();
+
 // Render page.
 $layoutView -> render($isLoggedIn, $loginView, $dateTimeView, $registrationView);
