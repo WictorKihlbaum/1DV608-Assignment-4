@@ -6,11 +6,11 @@
 require_once('view/LoginView.php');
 require_once('view/DateTimeView.php');
 require_once('view/LayoutView.php');
-require_once('view/RegistrationView.php');
+require_once('view/RegisterView.php');
 
 // Controllers.
 require_once('controller/LoginController.php');
-require_once('controller/RegistrationController.php');
+require_once('controller/RegisterController.php');
 
 // Models.
 require_once('model/LoginModel.php');
@@ -29,15 +29,16 @@ $loginModel = new LoginModel($sessionModel);
 $loginView = new LoginView($loginModel);
 $dateTimeView = new DateTimeView();
 $layoutView = new LayoutView();
-$registrationView = new RegistrationView();
+$registerView = new RegisterView();
 
 //CREATE OBJECTS OF THE CONTROLLERS
 $loginController = new LoginController($loginView, $loginModel);
-$registrationController = new RegistrationController($registrationView);
+$registerController = new RegisterController($registerView);
 
 // Verify whether user is logged in or not.
 $isLoggedIn = $loginController -> verifyUserState();
-$registrationController -> registrateUser();
+
+$registerController -> registerUser();
 
 // Render page.
-$layoutView -> render($isLoggedIn, $loginView, $dateTimeView, $registrationView);
+$layoutView -> render($isLoggedIn, $loginView, $dateTimeView, $registerView);

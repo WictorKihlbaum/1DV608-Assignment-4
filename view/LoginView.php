@@ -122,7 +122,7 @@ class LoginView {
 			// ...return user if everything is typed in correctly.
 			return new UserModel($this -> getRequestUserName(), $this -> getRequestPassword());		
 		
-		} catch (\Exception $e) { // Double-check which exception-message was thrown and set it to feedback message.
+		} catch (Exception $e) { // Double-check which exception-message was thrown and set it to feedback message.
 			
 			if ($e -> getMessage() == self::$missingUserNameMessage) {
 				

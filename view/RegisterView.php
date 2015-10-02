@@ -1,17 +1,17 @@
 <?php
 
-class RegistrationView {
+class RegisterView {
     
-    private static $register = 'RegistrationView::Register';
-    private static $desiredUserName = 'RegistrationView::DesiredUserName';
-	private static $desiredPassword = 'RegistrationView::DesiredPassword';
-	private static $repeatDesiredPassword = 'RegistrationView::RepeatDesiredPassword';
+    private static $register = 'RegisterView::Register';
+    private static $userName = 'RegisterView::UserName';
+	private static $desiredPassword = 'RegisterView::DesiredPassword';
+	private static $repeatDesiredPassword = 'RegisterView::RepeatDesiredPassword';
 	
-	private static $messageId = 'RegistrationView::Message';
+	private static $messageId = 'RegisterView::Message';
 	private $feedbackMessage = "";
 	
     
-    public function generateRegistrationFormHTML() {
+    public function generateRegisterFormHTML() {
 		
 		return '
 			<h2>Register new user</h2>
@@ -43,7 +43,7 @@ class RegistrationView {
 	}
 	
 	private function getRequestDesiredUserName() {
-		//RETURN REQUEST VARIABLE: DESIRED USERNAME
+	
 		if (isset($_POST[self::$desiredUserName])) {
 			
 			return $_POST[self::$desiredUserName];
@@ -55,7 +55,7 @@ class RegistrationView {
 	}
 	
 	private function getRequestDesiredPassword() {
-		//RETURN REQUEST VARIABLE: DESIRED PASSWORD
+	
 		if (isset($_POST[self::$desiredPassword])) {
 			
 			return $_POST[self::$desiredPassword];
@@ -67,7 +67,7 @@ class RegistrationView {
 	}
 	
 	private function getRequestRepeatDesiredPassword() {
-		//RETURN REQUEST VARIABLE: DESIRED REPEAT PASSWORD
+		
 		if (isset($_POST[self::$repeatDesiredPassword])) {
 			
 			return $_POST[self::$repeatDesiredPassword];
@@ -76,6 +76,11 @@ class RegistrationView {
 			
 			return "";
 		}
+	}
+	
+	public function getNewUser() {
+		
+		return new UserModel($this -> getRequestDesiredUserName(), $this -> getRequestDesiredPassword());		
 	}
 	
 }
