@@ -5,7 +5,7 @@ class LayoutView {
   private static $registerUserLink = "LayoutView::RegisterUserLink";
   
   
-  public function render($isLoggedIn, LoginView $loginView, DateTimeView $dateTimeView, RegistrationView $registrationView) {
+  public function render($isLoggedIn, LoginView $loginView, DateTimeView $dateTimeView, RegisterView $registerView) {
     
     echo '<!DOCTYPE html>
       <html>
@@ -17,7 +17,7 @@ class LayoutView {
           <h1>Assignment 2</h1>
           ' . $this -> showNavigationLink($isLoggedIn) . '
           ' . $this -> renderIsLoggedIn($isLoggedIn) . '
-          ' . $this -> showForm($isLoggedIn, $loginView, $registrationView) . '
+          ' . $this -> showForm($isLoggedIn, $loginView, $registerView) . '
           
           <div class="container">
               
@@ -56,11 +56,11 @@ class LayoutView {
   }
     
   // Check the url-string and show the correct HTML-form.
-  private function showForm($isLoggedIn, $loginView, $registrationView) {
+  private function showForm($isLoggedIn, $loginView, $registerView) {
     
     if ($_SERVER['QUERY_STRING'] == "registration") {
       
-      return $registrationView -> generateRegistrationFormHTML();
+      return $registerView -> generateRegisterFormHTML();
   
     } else {
       
