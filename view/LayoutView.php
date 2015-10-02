@@ -47,7 +47,7 @@ class LayoutView {
       
       return ' <a href="/?registration" name="' . self::$registerUserLink . '">Register a new user</a> ';
 
-    } else if (!$isLoggedIn && $_SERVER['QUERY_STRING'] == "registration"){
+    } else if (!$isLoggedIn && $_SERVER['QUERY_STRING'] == "registration") {
       
       return ' <a href="/?">Back to login</a> ';
     }
