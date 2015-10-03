@@ -11,7 +11,7 @@ class RegisterView {
 	// '$feedbackMessage' will get one of the below values depending on situation. 
 	private $feedbackMessage = "";
 	// Feedback messages.
-	private static $noCredentialsMessage = "Username has too few characters, at least 3 characters. Password has too few characters, at least 6 characters";
+	private static $noCredentialsMessage = "Username has too few characters, at least 3 characters.<br>Password has too few characters, at least 6 characters";
 	private static $noUserNameMessage = "Username has too few characters, at least 3 characters";
 	private static $noPasswordMessage = "Password has too few characters, at least 6 characters";
 	private static $passwordsDoNotMatchMessage = "Passwords do not match";
@@ -80,7 +80,7 @@ class RegisterView {
 	
 	public function getNewUser() {
 		
-		try { 
+		try { // TODO: Throw extended custom exceptions instead.
 			
 			if ($this -> getRequestUserName() && $this -> getRequestPassword() == "") {
 				
@@ -103,12 +103,53 @@ class RegisterView {
 		
 		} catch (Exception $e) {
 			
-			switch ($e -> getMessage()) {
+			switch ($e -> getMessage()) { // TODO: Remove switch and catch extended exception-classes instead.
 				
 				case self::$noCredentialsMessage: 
 					$this -> setFeedbackMessage(self::$noCredentialsMessage);
-			} // Continue...
+					
+				case self::$noUserNameMessage:
+					$this -> setFeedbackMessage(self::$noUserNameMessage);
+					
+				case self::$noPasswordMessage:
+					$this -> setFeedbackMessage(self::$noPasswordMessage);
+					
+				case self::$passwordsDoNotMatchMessage:
+					$this -> setFeedbackMessage(self::$passwordsDoNotMatchMessage);
+					
+				default: break;
+			}
 		}	
+	}
+	
+	private function setFeedbackMessage($feedbackMessage) {
+		
+		$this -> feedbackMessage = $feedbackMessage;
+	}
+	
+	private function getFeedbackMessage() {
+		
+        return $this -> feedbackMessage;
+	}
+	
+	public function setNoCredentialsFeedbackMessage() {
+		
+		$this -> setFeedbackMessage(self::$noCredentialsMessage);
+	}
+	
+	public function setNoUserNameFeedbackMessage() {
+		
+		$this -> setFeedbackMessage(self::$noUserNameMessage);
+	}
+	
+	public function setNoPasswordFeedbackMessage() {
+		
+		$this -> setFeedbackMessage(self::$noPasswordMessage);
+	}
+	
+	public function setPasswordsDoNotMatchFeedbackMessage() {
+		
+		$this -> setFeedbackMessage(self::$passwordsDoNotMatchMessage);
 	}
 	
 }
