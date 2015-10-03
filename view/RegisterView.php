@@ -34,7 +34,7 @@ class RegisterView {
 		
 			<form method="post" > 
 				<fieldset>
-					<legend>Register a new user - Write username and password</legend>¨
+					<legend>Register a new user - Write username and password</legend>
 					<p id="' . self::$messageId . '">' . $this -> feedbackMessage . '</p>
 					
 					<label for="' . self::$userName . '">Username :</label>
@@ -92,15 +92,17 @@ class RegisterView {
 		
 		try { // TODO: Throw extended custom exceptions instead.
 			
-			if ($this -> getRequestUserName() && $this -> getRequestPassword() == "") {
+			if ($this -> getRequestUserName() && 
+				$this -> getRequestPassword() &&
+				$this -> getRequestPasswordRepeat() == "") {
 				
 				throw new \Exception(self::$noCredentialsMessage);
 				
-			} else if ($this -> getRequestUserName() == "") {
+			} else if ($this -> getRequestUserName() == "" && $this -> getRequestPassword() != "") {
 
 				throw new \Exception(self::$noUserNameMessage);
 			
-			} else if ($this -> getRequestPassword() == "") {
+			} else if ($this -> getRequestPassword() == "" && $this -> getRequestUserName() != "") {
 
 				throw new \Exception(self::$noPasswordMessage);
 				
@@ -108,7 +110,7 @@ class RegisterView {
 				
 				throw new \Exception(self::$passwordsDoNotMatchMessage);
 				
-			} else if (!checkUserNameCharacters($this -> getRequestUserName())) {
+			} else if (!ctype_alnum($this -> getRequestUserName())) {
 				
 				throw new \Exception(self::$invalidCharactersMessage);
 			}
@@ -131,12 +133,15 @@ class RegisterView {
 				case self::$passwordsDoNotMatchMessage:
 					$this -> setFeedbackMessage(self::$passwordsDoNotMatchMessage);
 					
+				case self::$invalidCharactersMessage:
+					$this -> setFeedbackMessage(self::$invalidCharactersMessage);
+					
 				default: break;
 			}
 		}	
 	}
 	
-	private function checkUserNameCharacters($userNameInput) {
+	/*private function checkUserNameCharacters($userNameInput) {
 		
 		if (ctype_alnum($userNameInput)) {
 			
@@ -144,17 +149,17 @@ class RegisterView {
 		}
 		
 		return false;
-	}
+	}*/
 	
 	private function setFeedbackMessage($feedbackMessage) {
 		
 		$this -> feedbackMessage = $feedbackMessage;
 	}
 	
-	private function getFeedbackMessage() {
+	/*private function getFeedbackMessage() {
 		
         return $this -> feedbackMessage;
-	}
+	}*/
 	
 	public function setRegisteredNewUserFeedbackMessage() {
 		

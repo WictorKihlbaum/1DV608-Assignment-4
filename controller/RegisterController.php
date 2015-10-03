@@ -10,7 +10,7 @@ class RegisterController {
     public function __construct($registerView, $registerModel, $loginModel) {
         
         $this -> registerView = $registerView;
-        $this -> regitserModel = $registerModel;
+        $this -> registerModel = $registerModel;
         $this -> loginModel = $loginModel;
     }
     
@@ -36,6 +36,8 @@ class RegisterController {
             }
   
         } catch (Exception $e) {
+            
+            echo "CATCH";
             
             $this -> registerView -> setUserAlreadyExistsFeedbackMessage();
         }
