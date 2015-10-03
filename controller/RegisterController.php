@@ -3,18 +3,41 @@
 class RegisterController {
     
     private $registerView;
+    private $registerModel;
+    private $loginModel;
     
     
-    public function __construct($registerView) {
+    public function __construct($registerView, $registerModel, $loginModel) {
         
         $this -> registerView = $registerView;
+        $this -> regitserModel = $registerModel;
+        $this -> loginModel = $loginModel;
     }
     
-    public function registerUser() {
+    public function verifyUserState() {
         
-        if ($this -> registerView -> didUserPressRegister()) {
+        if (!$this -> loginModel -> loggedInUser() &&
+             $this -> registerView -> didUserPressRegister()) {
             
-            echo "TEST";
+            $this -> registerUser();
+        }
+    }
+    
+    private function registerUser() {
+        
+         $newUser = $this -> registerView -> getNewUser();
+         
+         try {
+            
+            if ($newUser != null) {
+                
+                $this -> registerModel -> validateUserInput($newUser);
+                $this -> registerView -> setRegisteredNewUserFeedbackMessage();
+            }
+  
+        } catch (Exception $e) {
+            
+            $this -> registerView -> setUserAlreadyExistsFeedbackMessage();
         }
     }
 }
