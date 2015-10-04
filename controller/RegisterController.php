@@ -35,9 +35,7 @@ class RegisterController {
                 $this -> registerView -> setRegisteredNewUserFeedbackMessage();
             }
   
-        } catch (Exception $e) {
-            
-            echo "CATCH";
+        } catch (UserAlreadyExistsException $e) {
             
             $this -> registerView -> setUserAlreadyExistsFeedbackMessage();
         }

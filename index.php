@@ -18,6 +18,14 @@ require_once('model/RegisterModel.php');
 require_once('model/UserModel.php');
 require_once('model/SessionModel.php');
 
+// Extended Exceptions.
+require_once('Exceptions/InvalidCharactersException.php');
+require_once('Exceptions/NoCredentialsException.php');
+require_once('Exceptions/NoPasswordException.php');
+require_once('Exceptions/NoUserNameException.php');
+require_once('Exceptions/PasswordsDoNotMatchException.php');
+require_once('Exceptions/UserAlreadyExistsException.php');
+
 //MAKE SURE ERRORS ARE SHOWN... MIGHT WANT TO TURN THIS OFF ON A PUBLIC SERVER
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');

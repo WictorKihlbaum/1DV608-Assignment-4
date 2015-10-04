@@ -12,7 +12,7 @@ class RegisterModel {
         if ($this -> registeredUserName == $newUser -> getUserName() && 
             $this -> registeredPassword == $newUser -> getPassword()) {
             
-            throw new \Exception("User exists, pick another username");
+            throw new \UserAlreadyExistsException("User exists, pick another username");
         }         
     }
 }

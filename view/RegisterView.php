@@ -13,13 +13,13 @@ class RegisterView {
 	// '$feedbackMessage' will get one of the below values depending on situation. 
 	private $feedbackMessage = "";
 	// Feedback messages.
-	private static $registeredNewUserMessage = "Registered new user";
-	private static $noCredentialsMessage = "Username has too few characters, at least 3 characters.<br>Password has too few characters, at least 6 characters";
-	private static $noUserNameMessage = "Username has too few characters, at least 3 characters";
-	private static $noPasswordMessage = "Password has too few characters, at least 6 characters";
-	private static $passwordsDoNotMatchMessage = "Passwords do not match";
-	private static $invalidCharactersMessage = "Username contains invalid characters";
-	private static $UserAlreadyExistsMessage = "User exists, pick another username";
+	private static $registeredNewUserMessage = "Registered new user.";
+	private static $noCredentialsMessage = "Username has too few characters, at least 3 characters.<br>Password has too few characters, at least 6 characters.";
+	private static $noUserNameMessage = "Username has too few characters, at least 3 characters.";
+	private static $noPasswordMessage = "Password has too few characters, at least 6 characters.";
+	private static $passwordsDoNotMatchMessage = "Passwords do not match.";
+	private static $invalidCharactersMessage = "Username contains invalid characters.";
+	private static $UserAlreadyExistsMessage = "User exists, pick another username.";
 	
 	
 	public function __construct($registerModel){
@@ -92,103 +92,56 @@ class RegisterView {
 		
 		try { // TODO: Throw extended custom exceptions instead.
 			
-			if ($this -> getRequestUserName() && 
-				$this -> getRequestPassword() &&
+			if ($this -> getRequestUserName() == "" && 
+				$this -> getRequestPassword() == "" &&
 				$this -> getRequestPasswordRepeat() == "") {
 				
-				throw new \Exception(self::$noCredentialsMessage);
+				throw new \NoCredentialsException();
 				
 			} else if ($this -> getRequestUserName() == "" && $this -> getRequestPassword() != "") {
 
-				throw new \Exception(self::$noUserNameMessage);
+				throw new \NoUserNameException();
 			
 			} else if ($this -> getRequestPassword() == "" && $this -> getRequestUserName() != "") {
 
-				throw new \Exception(self::$noPasswordMessage);
+				throw new \NoPasswordException();
 				
 			} else if ($this -> getRequestPassword() != $this -> getRequestPasswordRepeat()) {
 				
-				throw new \Exception(self::$passwordsDoNotMatchMessage);
+				throw new \PasswordsDoNotMatchException();
 				
-			} else if (!ctype_alnum($this -> getRequestUserName())) {
+			} else if (!ctype_alnum($this -> getRequestUserName()) && $this -> getRequestUserName() != "") {
 				
-				throw new \Exception(self::$invalidCharactersMessage);
+				throw new \InvalidCharactersException();
 			}
 			
 			return new UserModel($this -> getRequestUserName(), $this -> getRequestPassword());		
 		
-		} catch (Exception $e) {
-			
-			switch ($e -> getMessage()) { // TODO: Remove switch and catch extended exception-classes instead.
-				
-				case self::$noCredentialsMessage: 
-					$this -> setFeedbackMessage(self::$noCredentialsMessage);
-					
-				case self::$noUserNameMessage:
-					$this -> setFeedbackMessage(self::$noUserNameMessage);
-					
-				case self::$noPasswordMessage:
-					$this -> setFeedbackMessage(self::$noPasswordMessage);
-					
-				case self::$passwordsDoNotMatchMessage:
-					$this -> setFeedbackMessage(self::$passwordsDoNotMatchMessage);
-					
-				case self::$invalidCharactersMessage:
-					$this -> setFeedbackMessage(self::$invalidCharactersMessage);
-					
-				default: break;
-			}
-		}	
-	}
-	
-	/*private function checkUserNameCharacters($userNameInput) {
+		} catch (NoCredentialsException $e) {
 		
-		if (ctype_alnum($userNameInput)) {
+			$this -> setFeedbackMessage(self::$noCredentialsMessage);
 			
-			return true;
+		} catch (NoUserNameException $e) {
+			
+			$this -> setFeedbackMessage(self::$noUserNameMessage);
+			
+		} catch (NoPasswordException $e) {
+			
+			$this -> setFeedbackMessage(self::$noPasswordMessage);
+			
+		} catch (PasswordsDoNotMatchException $e) {
+			
+			$this -> setFeedbackMessage(self::$passwordsDoNotMatchMessage);
+			
+		} catch (InvalidCharactersException $e) {
+			
+			$this -> setFeedbackMessage(self::$invalidCharactersMessage);
 		}
-		
-		return false;
-	}*/
+	}
 	
 	private function setFeedbackMessage($feedbackMessage) {
 		
 		$this -> feedbackMessage = $feedbackMessage;
-	}
-	
-	/*private function getFeedbackMessage() {
-		
-        return $this -> feedbackMessage;
-	}*/
-	
-	public function setRegisteredNewUserFeedbackMessage() {
-		
-		$this -> setFeedbackMessage(self::$registeredNewUserMessage);
-	}
-	
-	public function setNoCredentialsFeedbackMessage() {
-		
-		$this -> setFeedbackMessage(self::$noCredentialsMessage);
-	}
-	
-	public function setNoUserNameFeedbackMessage() {
-		
-		$this -> setFeedbackMessage(self::$noUserNameMessage);
-	}
-	
-	public function setNoPasswordFeedbackMessage() {
-		
-		$this -> setFeedbackMessage(self::$noPasswordMessage);
-	}
-	
-	public function setPasswordsDoNotMatchFeedbackMessage() {
-		
-		$this -> setFeedbackMessage(self::$passwordsDoNotMatchMessage);
-	}
-	
-	public function setInvalidCharactersFeedbackMessage() {
-		
-		$this -> setFeedbackMessage(self::$invalidCharactersMessage);
 	}
 	
 	public function setUserAlreadyExistsFeedbackMessage() {
