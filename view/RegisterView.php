@@ -15,11 +15,11 @@ class RegisterView {
 	// Feedback messages.
 	private static $registeredNewUserMessage = "Registered new user.";
 	private static $noCredentialsMessage = "Username has too few characters, at least 3 characters.<br>Password has too few characters, at least 6 characters.";
-	private static $noUserNameMessage = "Username has too few characters, at least 3 characters.";
-	private static $noPasswordMessage = "Password has too few characters, at least 6 characters.";
+	private static $noValidUserNameMessage = "Username has too few characters, at least 3 characters.";
+	private static $noValidPasswordMessage = "Password has too few characters, at least 6 characters.";
 	private static $passwordsDoNotMatchMessage = "Passwords do not match.";
 	private static $invalidCharactersMessage = "Username contains invalid characters.";
-	private static $UserAlreadyExistsMessage = "User exists, pick another username.";
+	private static $userAlreadyExistsMessage = "User exists, pick another username.";
 	
 	
 	public function __construct($registerModel){
@@ -38,7 +38,7 @@ class RegisterView {
 					<p id="' . self::$messageId . '">' . $this -> feedbackMessage . '</p>
 					
 					<label for="' . self::$userName . '">Username :</label>
-					<input type="text" id="' . self::$userName . '" name="' . self::$userName . '" /><br>
+					<input type="text" id="' . self::$userName . '" name="' . self::$userName . '" value="' . preg_replace('/[^a-zA-Z0-9\s]/', '', $this -> getRequestUserName()) . '" /><br>
 					
 					<label for="' . self::$password . '">Password :</label>
 					<input type="password" id="' . self::$password . '" name="' . self::$password . '" /><br>
@@ -90,27 +90,30 @@ class RegisterView {
 	
 	public function getNewUser() {
 		
-		try { // TODO: Throw extended custom exceptions instead.
+		try {
 			
-			if ($this -> getRequestUserName() == "" && 
+			if ($this -> getRequestUserName() == "" && // Empty fields.
 				$this -> getRequestPassword() == "" &&
 				$this -> getRequestPasswordRepeat() == "") {
 				
 				throw new \NoCredentialsException();
 				
-			} else if ($this -> getRequestUserName() == "" && $this -> getRequestPassword() != "") {
+			} else if ($this -> getRequestUserName() == "" || // Empty or invalid username.
+				strlen($this -> getRequestUserName()) < 3) {
 
-				throw new \NoUserNameException();
+				throw new \NoValidUserNameException();
 			
-			} else if ($this -> getRequestPassword() == "" && $this -> getRequestUserName() != "") {
+			} else if ($this -> getRequestPassword() == "" || // Empty or invalid password.
+				strlen($this -> getRequestPassword()) < 6) {
 
-				throw new \NoPasswordException();
+				throw new \NoValidPasswordException();
 				
-			} else if ($this -> getRequestPassword() != $this -> getRequestPasswordRepeat()) {
+			} else if ($this -> getRequestPassword() != $this -> getRequestPasswordRepeat()) { // No matching passwords.
 				
 				throw new \PasswordsDoNotMatchException();
 				
-			} else if (!ctype_alnum($this -> getRequestUserName()) && $this -> getRequestUserName() != "") {
+			} else if (!ctype_alnum($this -> getRequestUserName()) && // Invalid username chars.
+				$this -> getRequestUserName() != "") {
 				
 				throw new \InvalidCharactersException();
 			}
@@ -121,13 +124,13 @@ class RegisterView {
 		
 			$this -> setFeedbackMessage(self::$noCredentialsMessage);
 			
-		} catch (NoUserNameException $e) {
+		} catch (NoValidUserNameException $e) {
 			
-			$this -> setFeedbackMessage(self::$noUserNameMessage);
+			$this -> setFeedbackMessage(self::$noValidUserNameMessage);
 			
-		} catch (NoPasswordException $e) {
+		} catch (NoValidPasswordException $e) {
 			
-			$this -> setFeedbackMessage(self::$noPasswordMessage);
+			$this -> setFeedbackMessage(self::$noValidPasswordMessage);
 			
 		} catch (PasswordsDoNotMatchException $e) {
 			
@@ -136,7 +139,7 @@ class RegisterView {
 		} catch (InvalidCharactersException $e) {
 			
 			$this -> setFeedbackMessage(self::$invalidCharactersMessage);
-		}
+		} 
 	}
 	
 	private function setFeedbackMessage($feedbackMessage) {
@@ -146,7 +149,12 @@ class RegisterView {
 	
 	public function setUserAlreadyExistsFeedbackMessage() {
 		
-		$this -> setFeedbackMessage(self::$UserAlreadyExistsMessage);
+		$this -> setFeedbackMessage(self::$userAlreadyExistsMessage);
+	}
+	
+	public function setRegisteredNewUserFeedbackMessage() {
+		
+		$this -> setFeedbackMessage(self::$registeredNewUserMessage);
 	}
 	
 }

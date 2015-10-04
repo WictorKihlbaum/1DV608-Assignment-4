@@ -21,8 +21,8 @@ require_once('model/SessionModel.php');
 // Extended Exceptions.
 require_once('Exceptions/InvalidCharactersException.php');
 require_once('Exceptions/NoCredentialsException.php');
-require_once('Exceptions/NoPasswordException.php');
-require_once('Exceptions/NoUserNameException.php');
+require_once('Exceptions/NoValidPasswordException.php');
+require_once('Exceptions/NoValidUserNameException.php');
 require_once('Exceptions/PasswordsDoNotMatchException.php');
 require_once('Exceptions/UserAlreadyExistsException.php');
 require_once('Exceptions/WrongInputException.php');
