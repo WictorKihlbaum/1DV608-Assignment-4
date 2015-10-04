@@ -40,7 +40,7 @@ class LoginController {
                 $this -> loginView -> setLoginFeedbackMessage();
             }
   
-        } catch (Exception $e) {
+        } catch (WrongInputException $e) {
             
             $this -> loginView -> setWrongInputFeedbackMessage();
         }

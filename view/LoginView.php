@@ -113,25 +113,22 @@ class LoginView {
 			
 			if ($this -> getRequestUserName() == "") {
 
-				throw new \Exception(self::$missingUserNameMessage);
+				throw new \NoUserNameException();
 			
 			} else if ($this -> getRequestPassword() == "") {
 
-				throw new \Exception(self::$missingPasswordMessage);
+				throw new \NoPasswordException();
 			}
 			// ...return user if everything is typed in correctly.
 			return new UserModel($this -> getRequestUserName(), $this -> getRequestPassword());		
 		
-		} catch (Exception $e) { // Double-check which exception-message was thrown and set it to feedback message.
+		} catch (NoUserNameException $e) {
 			
-			if ($e -> getMessage() == self::$missingUserNameMessage) {
-				
-				$this -> setFeedbackMessage(self::$missingUserNameMessage);
-				
-			} else if ($e -> getMessage() == self::$missingPasswordMessage) {
-
-				$this -> setFeedbackMessage(self::$missingPasswordMessage);				
-			}
+			$this -> setFeedbackMessage(self::$missingUserNameMessage);
+			
+		} catch (NoPasswordException $e) {
+			
+			$this -> setFeedbackMessage(self::$missingPasswordMessage);	
 		}
 	}
 	

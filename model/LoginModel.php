@@ -19,7 +19,7 @@ class LoginModel {
         if ($this -> registeredUserName !== $user -> getUserName() || 
             $this -> registeredPassword !== $user -> getPassword()) {
             
-            throw new \Exception("Wrong name or password");
+            throw new \WrongInputException("Wrong name or password");
         }         
         
         // If correct user input create session.
