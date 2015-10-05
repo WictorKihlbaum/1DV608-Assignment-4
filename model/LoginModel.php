@@ -5,8 +5,8 @@ class LoginModel {
     private $sessionModel;
     
     // These two variables will act as stored database values for an already registered user.
-    private $registeredUserName = "Admin";
-    private $registeredPassword = "Password";
+    //private $registeredUserName = "Admin";
+    //private $registeredPassword = "Password";
     
     
     public function __construct($sessionModel) {
@@ -15,6 +15,20 @@ class LoginModel {
     }
 
     public function validateUserInput($user) {
+        
+        $inputToSearchFor = "Username: " . $user -> getUserName() . " Password: " . $user -> getPassword();
+        $textFileToSearchIn = file_get_contents("./Users/RegisteredUsers.txt");
+        
+        $textFileToSearchIn = explode("\n", $textFileToSearchIn);
+        
+        if (!in_array($inputToSearchFor, $textFileToSearchIn)){
+        
+            throw new \WrongInputException("Wrong name or password");
+        }
+        
+        $this -> sessionModel -> setUserSession();
+        
+        /*
         // Validate user input and throw an exception if one doesn't match.
         if ($this -> registeredUserName !== $user -> getUserName() || 
             $this -> registeredPassword !== $user -> getPassword()) {
@@ -24,6 +38,7 @@ class LoginModel {
         
         // If correct user input create session.
         $this -> sessionModel -> setUserSession();
+        */
     }
     
     public function logoutUser() {
