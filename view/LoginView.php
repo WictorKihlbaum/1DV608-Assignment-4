@@ -113,11 +113,11 @@ class LoginView {
 			
 			if ($this -> getRequestUserName() == "") {
 
-				throw new \NoUserNameException();
+				throw new \NoValidUserNameException();
 			
 			} else if ($this -> getRequestPassword() == "") {
 
-				throw new \NoPasswordException();
+				throw new \NoValidPasswordException();
 			}
 			// ...return user if everything is typed in correctly.
 			return new UserModel($this -> getRequestUserName(), $this -> getRequestPassword());		

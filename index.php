@@ -27,7 +27,7 @@ require_once('Exceptions/PasswordsDoNotMatchException.php');
 require_once('Exceptions/UserAlreadyExistsException.php');
 require_once('Exceptions/WrongInputException.php');
 
-//MAKE SURE ERRORS ARE SHOWN... MIGHT WANT TO TURN THIS OFF ON A PUBLIC SERVER
+// MAKE SURE ERRORS ARE SHOWN... MIGHT WANT TO TURN THIS OFF ON A PUBLIC SERVER
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
@@ -36,13 +36,13 @@ $sessionModel = new SessionModel();
 $loginModel = new LoginModel($sessionModel);
 $registerModel = new RegisterModel();
 
-//CREATE OBJECTS OF THE VIEWS
+// CREATE OBJECTS OF THE VIEWS
 $loginView = new LoginView($loginModel);
 $dateTimeView = new DateTimeView();
 $layoutView = new LayoutView();
 $registerView = new RegisterView($registerModel);
 
-//CREATE OBJECTS OF THE CONTROLLERS
+// CREATE OBJECTS OF THE CONTROLLERS
 $loginController = new LoginController($loginView, $loginModel);
 $registerController = new RegisterController($registerView, $registerModel, $loginModel);
 
