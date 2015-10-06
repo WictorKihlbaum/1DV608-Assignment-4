@@ -49,7 +49,7 @@ class RegisterController {
         // Open the file to get existing content.
         $fileContent = file_get_contents($textFile);
         // Save new user to the textfile.
-        $fileContent .= "\nUsername: " . $newUser -> getUserName() . " Password: " . $newUser -> getPassword();
+        $fileContent .= "Username: " . $newUser -> getUserName() . " Password: " . $newUser -> getPassword() . "\n";
         // Write the content back to the textfile.
         file_put_contents($textFile, $fileContent);
     }
