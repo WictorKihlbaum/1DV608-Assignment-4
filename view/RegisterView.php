@@ -117,7 +117,7 @@ class RegisterView {
 				
 				throw new \InvalidCharactersException();
 			}
-			
+			// Return new user if everything is typed in correctly.
 			return new UserModel($this -> getRequestUserName(), $this -> getRequestPassword());		
 		
 		} catch (NoCredentialsException $e) {
