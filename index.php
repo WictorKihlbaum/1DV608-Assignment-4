@@ -18,7 +18,7 @@ require_once('model/RegisterModel.php');
 require_once('model/UserModel.php');
 require_once('model/SessionModel.php');
 
-// Extended Exceptions.
+// Extended Custom Exceptions.
 require_once('Exceptions/InvalidCharactersException.php');
 require_once('Exceptions/NoCredentialsException.php');
 require_once('Exceptions/NoValidPasswordException.php');
@@ -30,11 +30,6 @@ require_once('Exceptions/WrongInputException.php');
 //MAKE SURE ERRORS ARE SHOWN... MIGHT WANT TO TURN THIS OFF ON A PUBLIC SERVER
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
-
-
-//$user = new UserModel("Admin", "Password");
-//$registeredUsers = new RegisteredUsers();
-//$registeredUsers -> addUser($user);
 
 // CREATE OBJECTS OF THE MODELS
 $sessionModel = new SessionModel();
