@@ -122,11 +122,11 @@ class LoginView {
 			// ...return user if everything is typed in correctly.
 			return new UserModel($this -> getRequestUserName(), $this -> getRequestPassword());		
 		
-		} catch (NoUserNameException $e) {
+		} catch (NoValidUserNameException $e) {
 			
 			$this -> setFeedbackMessage(self::$missingUserNameMessage);
 			
-		} catch (NoPasswordException $e) {
+		} catch (NoValidPasswordException $e) {
 			
 			$this -> setFeedbackMessage(self::$missingPasswordMessage);	
 		}
