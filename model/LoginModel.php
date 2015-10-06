@@ -16,7 +16,7 @@ class LoginModel {
         $textFileToSearchIn = file_get_contents("./Users/RegisteredUsers.txt");
         $textFileToSearchIn = explode("\n", $textFileToSearchIn);
         
-        if (!in_array($inputToSearchFor, $textFileToSearchIn)){
+        if (!in_array($inputToSearchFor, $textFileToSearchIn)) {
         
             throw new \WrongInputException("Wrong name or password");
         }

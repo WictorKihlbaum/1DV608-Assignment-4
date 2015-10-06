@@ -38,7 +38,7 @@ class RegisterView {
 					<p id="' . self::$messageId . '">' . $this -> feedbackMessage . '</p>
 					
 					<label for="' . self::$userName . '">Username :</label>
-					<input type="text" id="' . self::$userName . '" name="' . self::$userName . '" value="' . preg_replace('/[^a-zA-Z0-9\s]/', '', $this -> getRequestUserName()) . '" /><br>
+					<input type="text" id="' . self::$userName . '" name="' . self::$userName . '" value="' . $this -> fillInUserName() . '" /><br>
 					
 					<label for="' . self::$password . '">Password :</label>
 					<input type="password" id="' . self::$password . '" name="' . self::$password . '" /><br>
@@ -51,6 +51,11 @@ class RegisterView {
 				</fieldset>
 			</form>
 		';
+	}
+	
+	private function fillInUserName() {
+		
+		return preg_replace('/[^a-zA-Z0-9\s]/', '', $this -> getRequestUserName());
 	}
 	
 	public function didUserPressRegister() {
