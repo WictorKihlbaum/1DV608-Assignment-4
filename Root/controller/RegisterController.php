@@ -44,7 +44,7 @@ class RegisterController {
     
     private function saveNewUserToTextFile($newUser) {
         
-        $textFile = './Users/RegisteredUsers.txt';
+        $textFile = '../Users/RegisteredUsers.txt';
                 
         // Open the file to get existing content.
         $fileContent = file_get_contents($textFile);
