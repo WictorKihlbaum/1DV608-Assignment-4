@@ -3,6 +3,7 @@
 class LoginModel {
 
     private $sessionModel;
+    private $registeredUsersFile = './Users/RegisteredUsers.txt';
     
     
     public function __construct($sessionModel) {
@@ -13,7 +14,7 @@ class LoginModel {
     public function validateUserInput($user) {
         
         $inputToSearchFor = "Username: " . $user -> getUserName() . " Password: " . $user -> getPassword();
-        $textFileToSearchIn = file_get_contents("./Users/RegisteredUsers.txt");
+        $textFileToSearchIn = file_get_contents($this -> registeredUsersFile);
         $textFileToSearchIn = explode("\n", $textFileToSearchIn);
         
         if (!in_array($inputToSearchFor, $textFileToSearchIn)) {

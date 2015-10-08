@@ -3,6 +3,7 @@
 class LayoutView {
   
   private static $registerUserLink = "LayoutView::RegisterUserLink";
+  private static $registerURL = "register";
   
   
   public function render($isLoggedIn, LoginView $loginView, DateTimeView $dateTimeView, RegisterView $registerView) {
@@ -43,22 +44,22 @@ class LayoutView {
   // Set correct navigation link and name depending on in which view the user is.
   private function showNavigationLink($isLoggedIn) {
     
-    if (!$isLoggedIn && $_SERVER['QUERY_STRING'] != "register") {
+    if (!$isLoggedIn && $_SERVER['QUERY_STRING'] != self::$registerURL) {
       
-      return ' <a href="register" name="' . self::$registerUserLink . '">Register a new user</a> ';
-
-    } else if (!$isLoggedIn && $_SERVER['QUERY_STRING'] == "register") {
+      return ' <a href="/?'.self::$registerURL.'" name="' . self::$registerUserLink . '">Register a new user</a> ';
+      
+    } else if (!$isLoggedIn && $_SERVER['QUERY_STRING'] == self::$registerURL) {
       
       return ' <a href="/?">Back to login</a> ';
     }
     
-    //return null;
+    return null;
   }
     
   // Check the url-string and show the correct HTML-form.
   private function showForm($isLoggedIn, $loginView, $registerView) {
     
-    if ($_SERVER['QUERY_STRING'] == "register") {
+    if ($_SERVER['QUERY_STRING'] == self::$registerURL) {
       
       return $registerView -> generateRegisterFormHTML();
   
