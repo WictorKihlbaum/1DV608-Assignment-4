@@ -1,2 +1,4 @@
 
 Username: Admin Password: Password
+Username: Wictor Password: Password
+Username: Calle Password: Password

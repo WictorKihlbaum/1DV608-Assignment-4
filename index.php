@@ -54,5 +54,5 @@ $registerController -> verifyUserState();
 $layoutView -> render($isLoggedIn, $loginView, $dateTimeView, $registerView);
 
 // Dev purpose.
-$textFile = '../Users/RegisteredUsers.txt';
-var_dump(file_get_contents($textFile)); 
+//$textFile = './Users/RegisteredUsers.txt';
+//var_dump(file_get_contents($textFile)); 

@@ -5,6 +5,7 @@ class RegisterController {
     private $registerView;
     private $registerModel;
     private $loginModel;
+    private $registeredUserFile = './Users/RegisteredUsers.txt';
     
     
     public function __construct($registerView, $registerModel, $loginModel) {
@@ -43,15 +44,13 @@ class RegisterController {
     }
     
     private function saveNewUserToTextFile($newUser) {
-        
-        $textFile = '../Users/RegisteredUsers.txt';
                 
         // Open the file to get existing content.
-        $fileContent = file_get_contents($textFile);
+        $fileContent = file_get_contents($registeredUserFile);
         // Save new user to the textfile.
         $fileContent .= "\nUsername: " . $newUser -> getUserName() . " Password: " . $newUser -> getPassword();
         // Write the content back to the textfile.
-        file_put_contents($textFile, $fileContent);
+        file_put_contents($registeredUserFile, $fileContent);
     }
     
 }

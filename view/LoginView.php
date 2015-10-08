@@ -138,11 +138,9 @@ class LoginView {
 		if (isset($_POST[self::$name])) {
 			
 			return $_POST[self::$name];
-			
-		} else {
-			
-			return "";
 		}
+			
+		return "";
 	}
 
 	private function getRequestPassword() {
@@ -150,11 +148,9 @@ class LoginView {
 		if (isset($_POST[self::$name])) {
 			
 			return $_POST[self::$password];
-			
-		} else {
-			
-			return "";
 		}
+			
+		return "";
 	}
 
 	/*public function reloadPage() {
