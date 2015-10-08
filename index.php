@@ -26,6 +26,7 @@ require_once('Exceptions/NoValidUserNameException.php');
 require_once('Exceptions/PasswordsDoNotMatchException.php');
 require_once('Exceptions/UserAlreadyExistsException.php');
 require_once('Exceptions/WrongInputException.php');
+require_once('Exceptions/RegisterWhileLoggedInException.php');
 
 // MAKE SURE ERRORS ARE SHOWN... MIGHT WANT TO TURN THIS OFF ON A PUBLIC SERVER
 error_reporting(E_ALL);
@@ -44,7 +45,7 @@ $registerView = new RegisterView($registerModel);
 
 // CREATE OBJECTS OF THE CONTROLLERS
 $loginController = new LoginController($loginView, $loginModel);
-$registerController = new RegisterController($registerView, $registerModel, $loginModel);
+$registerController = new RegisterController($registerView, $registerModel, $loginView, $loginModel);
 
 // Verify whether user is logged in or not.
 $isLoggedIn = $loginController -> verifyUserState();
@@ -54,5 +55,5 @@ $registerController -> verifyUserState();
 $layoutView -> render($isLoggedIn, $loginView, $dateTimeView, $registerView);
 
 // Dev purpose.
-$textFile = './Users/RegisteredUsers.txt';
-var_dump(file_get_contents($textFile)); 
+//$textFile = './Users/RegisteredUsers.txt';
+//var_dump(file_get_contents($textFile)); 

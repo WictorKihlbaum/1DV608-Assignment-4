@@ -46,7 +46,7 @@ class LayoutView {
     
     if (!$isLoggedIn && $_SERVER['QUERY_STRING'] != self::$registerURL) {
       
-      return ' <a href="/?'.self::$registerURL.'" name="' . self::$registerUserLink . '">Register a new user</a> ';
+      return ' <a href="/?'. self::$registerURL .'" name="' . self::$registerUserLink . '">Register a new user</a> ';
       
     } else if (!$isLoggedIn && $_SERVER['QUERY_STRING'] == self::$registerURL) {
       

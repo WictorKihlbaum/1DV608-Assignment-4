@@ -4,23 +4,37 @@ class RegisterController {
     
     private $registerView;
     private $registerModel;
+    private $loginView;
     private $loginModel;
     private $registeredUsersFile = './Users/RegisteredUsers.txt';
     
     
-    public function __construct($registerView, $registerModel, $loginModel) {
+    public function __construct($registerView, $registerModel, $loginView, $loginModel) {
         
         $this -> registerView = $registerView;
         $this -> registerModel = $registerModel;
+        $this -> loginView = $loginView;
         $this -> loginModel = $loginModel;
     }
     
     public function verifyUserState() {
         
-        if (!$this -> loginModel -> loggedInUser() &&
-             $this -> registerView -> didUserPressRegister()) {
+        try {
             
-            $this -> registerUser();
+            if (!$this -> loginModel -> loggedInUser() &&
+                 $this -> registerView -> didUserPressRegister()) {
+            
+                $this -> registerUser();
+            
+            } else if ($this -> loginModel -> loggedInUser() &&
+                       $this -> registerView -> didUserPressRegister()) {
+            
+                throw new \RegisterWhileLoggedInException();
+            }
+            
+        } catch (RegisterWhileLoggedInException $e) {
+            
+            $this -> registerView -> setRegisterWhileLoggedInFeedbackMessage();
         }
     }
     

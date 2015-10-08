@@ -20,6 +20,7 @@ class RegisterView {
 	private static $passwordsDoNotMatchMessage = "Passwords do not match.";
 	private static $invalidCharactersMessage = "Username contains invalid characters.";
 	private static $userAlreadyExistsMessage = "User exists, pick another username.";
+	private static $registerWhileLoggedInMessage = "You can't register a new user while logged in. Please logout and try again.";
 	
 	
 	public function __construct($registerModel){
@@ -160,6 +161,11 @@ class RegisterView {
 	public function setRegisteredNewUserFeedbackMessage() {
 		
 		$this -> setFeedbackMessage(self::$registeredNewUserMessage);
+	}
+	
+	public function setRegisterWhileLoggedInFeedbackMessage() {
+		
+		$this -> setFeedbackMessage(self::$registerWhileLoggedInMessage);
 	}
 	
 }
