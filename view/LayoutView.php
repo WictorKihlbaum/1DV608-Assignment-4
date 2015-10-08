@@ -43,11 +43,11 @@ class LayoutView {
   // Set correct navigation link and name depending on in which view the user is.
   private function showNavigationLink($isLoggedIn) {
     
-    if (!$isLoggedIn && $_SERVER['QUERY_STRING'] != "registration") {
+    if (!$isLoggedIn && $_SERVER['QUERY_STRING'] != "register") {
       
-      return ' <a href="/?registration" name="' . self::$registerUserLink . '">Register a new user</a> ';
+      return ' <a href="/?register" name="' . self::$registerUserLink . '">Register a new user</a> ';
 
-    } else if (!$isLoggedIn && $_SERVER['QUERY_STRING'] == "registration") {
+    } else if (!$isLoggedIn && $_SERVER['QUERY_STRING'] == "register") {
       
       return ' <a href="/?">Back to login</a> ';
     }
@@ -58,7 +58,7 @@ class LayoutView {
   // Check the url-string and show the correct HTML-form.
   private function showForm($isLoggedIn, $loginView, $registerView) {
     
-    if ($_SERVER['QUERY_STRING'] == "registration") {
+    if ($_SERVER['QUERY_STRING'] == "register") {
       
       return $registerView -> generateRegisterFormHTML();
   
