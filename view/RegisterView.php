@@ -27,8 +27,21 @@ class RegisterView {
 		
 		$this -> registerModel = $registerModel;
 	}
+	
+	public function response($isLoggedIn) {
+		
+		$message = "";
+		
+		if (!$isLoggedIn) {
+			
+			$message = $this -> getFeedbackMessage();
+			$response = $this -> generateRegisterFormHTML($message);
+		}
+		
+		return $response;
+	}
     
-    public function generateRegisterFormHTML() {
+    private function generateRegisterFormHTML($message) {
 		
 		return '
 			<h2>Register new user</h2>
@@ -36,7 +49,7 @@ class RegisterView {
 			<form method="post" > 
 				<fieldset>
 					<legend>Register a new user - Write username and password</legend>
-					<p id="' . self::$messageId . '">' . $this -> feedbackMessage . '</p>
+					<p id="' . self::$messageId . '">' . $message . '</p>
 					
 					<label for="' . self::$userName . '">Username :</label>
 					<input type="text" id="' . self::$userName . '" name="' . self::$userName . '" value="' . $this -> fillInUserName() . '" /><br>
@@ -151,6 +164,11 @@ class RegisterView {
 	private function setFeedbackMessage($feedbackMessage) {
 		
 		$this -> feedbackMessage = $feedbackMessage;
+	}
+	
+	private function getFeedbackMessage() {
+		
+        return $this -> feedbackMessage;
 	}
 	
 	public function setUserAlreadyExistsFeedbackMessage() {

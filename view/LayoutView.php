@@ -15,7 +15,7 @@ class LayoutView {
           <title>Login Example</title>
         </head>
         <body>
-          <h1>Assignment 2</h1>
+          <h1>Assignment 4</h1>
           ' . $this -> showNavigationLink($isLoggedIn) . '
           ' . $this -> renderIsLoggedIn($isLoggedIn) . '
           ' . $this -> showForm($isLoggedIn, $loginView, $registerView) . '
@@ -61,7 +61,7 @@ class LayoutView {
     
     if ($_SERVER['QUERY_STRING'] == self::$registerURL) {
       
-      return $registerView -> generateRegisterFormHTML();
+      return $registerView -> response($isLoggedIn);
   
     } else {
       
