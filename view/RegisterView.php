@@ -47,19 +47,18 @@ class RegisterView {
 			<form method="post" > 
 				<fieldset>
 					<legend>Register a new user - Write username and password</legend>
-					<p id="' . self::$messageId . '">' . $message . '</p>
+					<p id="'. self::$messageId .'">'. $message .'</p>
 					
-					<label for="' . self::$userName . '">Username :</label>
-					<input type="text" id="'. self::$userName .'" name="' . self::$userName . '" value="' . $this -> fillInUserName() . '" /><br>
+					<label for="'. self::$userName .'">Username: </label>
+					<input type="text" id="'. self::$userName .'" name="'. self::$userName .'" value="'. $this -> fillInUserName() .'" /><br>
 					
-					<label for="' . self::$password . '">Password :</label>
-					<input type="password" id="'. self::$password .'" name="' . self::$password . '" /><br>
+					<label for="'. self::$password .'">Password: </label>
+					<input type="password" id="'. self::$password .'" name="'. self::$password .'" /><br>
 					
-					<label for="'. self::$passwordRepeat .'">Repeat password :</label>
-					<input type="password" id="'. self::$passwordRepeat .'" name="' . self::$passwordRepeat . '" /><br>
+					<label for="'. self::$passwordRepeat .'">Repeat password: </label>
+					<input type="password" id="'. self::$passwordRepeat .'" name="'. self::$passwordRepeat .'" /><br>
 					
-					<input type="submit" name="' . self::$register . '" value="Register" />
-					
+					<input type="submit" name="'. self::$register .'" value="Register" />
 				</fieldset>
 			</form>
 		';
@@ -67,7 +66,8 @@ class RegisterView {
 	
 	private function fillInUserName() {
 		// This will also format the username if it contains any invalid characters.
-		return preg_replace('/[^a-zA-Z0-9\s]/', '', $this -> getRequestUserName());
+		//return preg_replace('/[^a-zA-Z0-9\s]/', '', $this -> getRequestUserName());
+		return trim($this -> getRequestUserName());
 	}
 	
 	public function didUserPressRegister() {
