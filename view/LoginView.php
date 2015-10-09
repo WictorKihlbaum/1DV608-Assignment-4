@@ -24,7 +24,7 @@ class LoginView {
 	private static $wrongInputMessage = "Wrong name or password";
 	
 	
-	public function __construct($loginModel){
+	public function __construct($loginModel) {
 		
 		$this -> loginModel = $loginModel;
 	}

@@ -23,21 +23,33 @@ class RegisterView {
 	private static $registerWhileLoggedInMessage = "You can't register a new user while logged in. Please logout and try again.";
 	
 	
-	public function __construct($registerModel){
+	public function __construct($registerModel) {
 		
 		$this -> registerModel = $registerModel;
 	}
 	
 	public function response($isLoggedIn) {
 		
-		$message = "";
+		try {
+			
+			$message = "";
 		
-		if (!$isLoggedIn) {
+			if (!$isLoggedIn) {
+				
+				$message = $this -> getFeedbackMessage();
+				$response = $this -> generateRegisterFormHTML($message);
+				
+				return $response;
+				
+			} else {
+				
+				throw new \RegisterWhileLoggedInException();
+			}
 			
+		} catch (RegisterWhileLoggedInException $e) {
+			
+			$this -> setRegisterWhileLoggedInFeedbackMessage();
 			$message = $this -> getFeedbackMessage();
-			$response = $this -> generateRegisterFormHTML($message);
-			
-			return $response;
 		}
 	}
     
