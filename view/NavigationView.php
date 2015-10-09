@@ -38,4 +38,10 @@ class NavigationView {
 	    return self::$registerURL;
 	}
 	
+	public function navigateToIndexURL() {
+	    
+		header('Location:/?');
+		exit();
+	}
+	
 }

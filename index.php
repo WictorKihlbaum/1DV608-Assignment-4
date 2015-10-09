@@ -38,18 +38,18 @@ $registeredUsersFile = './UserDAL/RegisteredUsers.txt'; // This should actually 
 // CREATE OBJECTS OF THE MODELS
 $sessionModel = new SessionModel();
 $loginModel = new LoginModel($sessionModel, $registeredUsersFile);
-$registerModel = new RegisterModel($registeredUsersFile);
+$registerModel = new RegisterModel($sessionModel, $registeredUsersFile);
 
 // CREATE OBJECTS OF THE VIEWS
-$loginView = new LoginView($loginModel);
+$loginView = new LoginView($loginModel, $sessionModel);
 $dateTimeView = new DateTimeView();
 $layoutView = new LayoutView();
 $registerView = new RegisterView($registerModel);
 $navigationView = new NavigationView();
 
 // CREATE OBJECTS OF THE CONTROLLERS
-$loginController = new LoginController($loginView, $loginModel);
-$registerController = new RegisterController($registerView, $registerModel, $loginView, $loginModel);
+$loginController = new LoginController($loginView, $loginModel, $sessionModel);
+$registerController = new RegisterController($registerView, $registerModel, $navigationView, $loginView);
 
 // Verify whether user is logged in or not.
 $isLoggedIn = $loginController -> verifyUserState();
@@ -59,4 +59,4 @@ $registerController -> verifyUserState();
 $layoutView -> render($isLoggedIn, $loginView, $dateTimeView, $registerView, $navigationView);
 
 // Dev purpose.
-var_dump(file_get_contents($registeredUsersFile)); 
+//var_dump(file_get_contents($registeredUsersFile)); 

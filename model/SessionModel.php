@@ -3,6 +3,8 @@
 class SessionModel {
     
     private static $userSession = "SessionModel::UserSession";
+    private static $newRegisteredUserSession = "SessionModel::NewRegisteredUserSession";
+    private static $newUserNameSession = "SessionModel::NewUserNameSession";
     
     
     public function __construct() {
@@ -29,4 +31,35 @@ class SessionModel {
         
         return false;
     }
+    
+    public function setNewRegisteredUserSession() {
+        
+        $_SESSION[self::$newRegisteredUserSession] = true;
+    }
+    
+    public function unsetNewRegisteredUserSession() {
+        
+        unset($_SESSION[self::$newRegisteredUserSession]);
+    }
+    
+    public function isNewRegisteredUserSessionSet() {
+        
+        return isset($_SESSION[self::$newRegisteredUserSession]);
+    }
+    
+    public function setNewUserNameSession($newUserName) {
+        
+        $_SESSION[self::$newUserNameSession] = $newUserName;
+    }
+    
+    public function getNewUserNameSession() {
+        
+        return $_SESSION[self::$newUserNameSession];
+    }
+    
+    public function unsetNewUserNameSession() {
+        
+        unset($_SESSION[self::$newUserNameSession]);
+    }
+    
 }

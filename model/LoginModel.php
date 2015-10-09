@@ -24,6 +24,12 @@ class LoginModel {
         }
         
         $this -> sessionModel -> setUserSession();
+        
+        if ($this -> sessionModel -> isNewRegisteredUserSessionSet()) {
+            
+            $this -> sessionModel -> unsetNewRegisteredUserSession();
+            $this -> sessionModel -> unsetNewUserNameSession();
+        }
     }
     
     public function logoutUser() {

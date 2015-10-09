@@ -4,29 +4,27 @@ class RegisterController {
     
     private $registerView;
     private $registerModel;
-    private $loginView; // Do I use this??
-    private $loginModel; // Do I need to use this??
-    //private $registeredUsersFile = './UserDAL/RegisteredUsers.txt';
+    private $navigationView;
     
     
-    public function __construct($registerView, $registerModel, $loginView, $loginModel) {
+    public function __construct($registerView, $registerModel, $navigationView, $loginView) {
         
         $this -> registerView = $registerView;
         $this -> registerModel = $registerModel;
+        $this -> navigationView = $navigationView;
         $this -> loginView = $loginView;
-        $this -> loginModel = $loginModel;
     }
     
     public function verifyUserState() {
         
         try {
             
-            if (!$this -> loginModel -> loggedInUser() &&
+            if (!$this -> registerModel -> loggedInUser() &&
                  $this -> registerView -> didUserPressRegister()) {
             
                 $this -> registerUser();
             
-            } else if ($this -> loginModel -> loggedInUser() &&
+            } else if ($this -> registerModel -> loggedInUser() &&
                        $this -> registerView -> didUserPressRegister()) {
             
                 throw new \RegisterWhileLoggedInException();
@@ -47,7 +45,8 @@ class RegisterController {
             if ($newUser != null) {
                 
                 $this -> registerModel -> validateUserInput($newUser);
-                $this -> registerView -> setRegisteredNewUserFeedbackMessage();
+                //$this -> loginView -> setRegisteredNewUserFeedbackMessage();
+                $this -> navigationView -> navigateToIndexURL();
             }
   
         } catch (UserAlreadyExistsException $e) {

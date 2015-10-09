@@ -14,7 +14,7 @@ class RegisterView {
 	private $feedbackMessage = "";
 	
 	// Feedback messages.
-	private static $registeredNewUserMessage = "Registered new user.";
+	//private static $registeredNewUserMessage = "Registered new user.";
 	private static $noCredentialsMessage = "Username has too few characters, at least 3 characters.<br>Password has too few characters, at least 6 characters.";
 	private static $noValidUserNameMessage = "Username has too few characters, at least 3 characters.";
 	private static $noValidPasswordMessage = "Password has too few characters, at least 6 characters.";
@@ -32,14 +32,11 @@ class RegisterView {
 	public function response($isLoggedIn) {
 			
 		$message = "";
-		
-		if (!$isLoggedIn) {
 			
-			$message = $this -> getFeedbackMessage();
-			$response = $this -> generateRegisterFormHTML($message);
+		$message = $this -> getFeedbackMessage();
+		$response = $this -> generateRegisterFormHTML($message);
 			
-			return $response;
-		}
+		return $response;
 	}
     
     private function generateRegisterFormHTML($message) {

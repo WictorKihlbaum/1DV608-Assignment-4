@@ -2,11 +2,13 @@
 
 class RegisterModel {
     
+    private $sessionModel;
     private $registeredUsersFile;
     
     
-    public function __construct($registeredUsersFile) {
+    public function __construct($sessionModel, $registeredUsersFile) {
         
+        $this -> sessionModel = $sessionModel;
         $this -> registeredUsersFile = $registeredUsersFile;
     }
     
@@ -23,6 +25,8 @@ class RegisterModel {
         } else {
             
             $this -> saveNewUserToTextFile($newUser);
+            $this -> sessionModel -> setNewRegisteredUserSession();
+            $this -> sessionModel -> setNewUserNameSession($newUser -> getUserName());
         }
     }
     
@@ -34,5 +38,10 @@ class RegisterModel {
         $fileContent .= "\nUsername: " . $newUser -> getUserName() . " Password: " . $newUser -> getPassword();
         // Write the content back to the textfile.
         file_put_contents($this -> registeredUsersFile, $fileContent);
+    }
+    
+    public function loggedInUser() {
+        // Return session for user.
+        return $this -> sessionModel -> getUserSession();
     }
 }

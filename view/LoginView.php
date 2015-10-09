@@ -3,6 +3,7 @@
 class LoginView {
 	
 	private $loginModel;
+	private $sessionModel;
 	
 	private static $login = 'LoginView::Login';
 	private static $logout = 'LoginView::Logout';
@@ -22,11 +23,13 @@ class LoginView {
 	private static $missingUserNameMessage = "Username is missing";
 	private static $missingPasswordMessage = "Password is missing";
 	private static $wrongInputMessage = "Wrong name or password";
+	private static $registeredNewUserMessage = "Registered new user.";
 	
 	
-	public function __construct($loginModel) {
+	public function __construct($loginModel, $sessionModel) {
 		
 		$this -> loginModel = $loginModel;
+		$this -> sessionModel = $sessionModel;
 	}
 	
 	/**
@@ -83,7 +86,7 @@ class LoginView {
 					<p id="' . self::$messageId . '">' . $message . '</p>
 					
 					<label for="' . self::$name . '">Username :</label>
-					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . $this -> getRequestUserName() . '" />
+					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . $this -> fillInUserName() . '" />
 
 					<label for="' . self::$password . '">Password :</label>
 					<input type="password" id="' . self::$password . '" name="' . self::$password . '" />
@@ -95,6 +98,20 @@ class LoginView {
 				</fieldset>
 			</form>
 		';
+	}
+	
+	private function fillInUserName() {
+		
+		var_dump($this -> sessionModel -> isNewRegisteredUserSessionSet());
+		
+		if ($this -> sessionModel -> isNewRegisteredUserSessionSet()) {
+			
+			return $this -> sessionModel -> getNewUserNameSession();
+			
+		} else {
+			
+			return $this -> getRequestUserName();
+		}
 	}
 
 	public function didUserPressLogin() {
@@ -182,6 +199,11 @@ class LoginView {
 	public function setWrongInputFeedbackMessage() {
 		
 		$this -> setFeedbackMessage(self::$wrongInputMessage);
+	}
+	
+	public function setRegisteredNewUserFeedbackMessage() {
+		
+		$this -> setFeedbackMessage(self::$registeredNewUserMessage);
 	}
 	
 }
