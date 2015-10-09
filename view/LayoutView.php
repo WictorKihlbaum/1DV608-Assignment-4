@@ -2,10 +2,6 @@
 
 class LayoutView {
   
-  private static $registerUserLink = "LayoutView::RegisterUserLink";
-  private static $registerURL = "register";
-  
-  
   public function render($isLoggedIn, LoginView $loginView, DateTimeView $dateTimeView, RegisterView $registerView, NavigationView $navigationView) {
     
     echo '<!DOCTYPE html>
