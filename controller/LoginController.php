@@ -16,8 +16,9 @@ class LoginController {
     
     public function verifyUserState() {
         
+        // Verify if a user has recently been registered.
         if ($this -> sessionModel -> isNewRegisteredUserSessionSet()) {
-            
+            // Show feedbackmessage and remove the session directly after.
             $this -> loginView -> setRegisteredNewUserFeedbackMessage();
             $this -> sessionModel -> unsetNewRegisteredUserSession();
         }
@@ -48,6 +49,7 @@ class LoginController {
                 
                 $this -> loginModel -> validateUserInput($user);
                 $this -> loginView -> setLoginFeedbackMessage();
+                // Unsets the newly added username-session first after the login-button has been pressed.
                 $this -> sessionModel -> unsetNewUserNameSession();
             }
   

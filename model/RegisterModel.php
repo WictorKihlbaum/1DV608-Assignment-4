@@ -27,7 +27,8 @@ class RegisterModel {
             $this -> saveNewUserToTextFile($newUser);
             
             $this -> sessionModel -> setNewRegisteredUserSession();
-            $this -> sessionModel -> setNewUserNameSession($newUser -> getUserName());
+            // Session for the new users username in particular.
+            $this -> sessionModel -> setNewUserNameSession($newUser -> getUserName()); 
         }
     }
     

@@ -33,7 +33,8 @@ require_once('Exceptions/RegisterWhileLoggedInException.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
-$registeredUsersFile = './UserDAL/RegisteredUsers.txt'; // This should actually be put outside root-catalogue.
+// This should actually be put outside root-catalogue.
+$registeredUsersFile = './UserDAL/RegisteredUsers.txt';
 
 // CREATE OBJECTS OF THE MODELS
 $sessionModel = new SessionModel();

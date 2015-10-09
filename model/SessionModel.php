@@ -12,6 +12,7 @@ class SessionModel {
         session_start();
     }
     
+    
     // SESSIONS FOR USER.
     
     public function setUserSession() {
@@ -52,7 +53,7 @@ class SessionModel {
     }
     
     
-    // SESSIONS FOR USERNAME.
+    // SESSIONS FOR USERNAME IN PARTICULAR.
     
     public function setNewUserNameSession($newUserName) {
         
@@ -73,6 +74,5 @@ class SessionModel {
         
         return $_SESSION[self::$newUserNameSession];
     }
-    
     
 }

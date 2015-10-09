@@ -30,7 +30,7 @@ class RegisterController {
             }
             
         } catch (RegisterWhileLoggedInException $e) {
-            
+            // User should not be able to register while logged in.
             $this -> registerView -> setRegisterWhileLoggedInFeedbackMessage();
         }
     }
@@ -44,6 +44,7 @@ class RegisterController {
             if ($newUser != null) {
                 
                 $this -> registerModel -> validateUserInput($newUser);
+                // Navigate back to loginView when user is successfully registered.
                 $this -> navigationView -> navigateToIndexURL();
             }
   

@@ -14,7 +14,6 @@ class RegisterView {
 	private $feedbackMessage = "";
 	
 	// Feedback messages.
-	//private static $registeredNewUserMessage = "Registered new user.";
 	private static $noCredentialsMessage = "Username has too few characters, at least 3 characters.<br>Password has too few characters, at least 6 characters.";
 	private static $noValidUserNameMessage = "Username has too few characters, at least 3 characters.";
 	private static $noValidPasswordMessage = "Password has too few characters, at least 6 characters.";
@@ -171,11 +170,6 @@ class RegisterView {
 	public function setUserAlreadyExistsFeedbackMessage() {
 		
 		$this -> setFeedbackMessage(self::$userAlreadyExistsMessage);
-	}
-	
-	public function setRegisteredNewUserFeedbackMessage() {
-		
-		$this -> setFeedbackMessage(self::$registeredNewUserMessage);
 	}
 	
 	public function setRegisterWhileLoggedInFeedbackMessage() {
