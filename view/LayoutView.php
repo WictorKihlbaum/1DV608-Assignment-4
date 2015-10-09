@@ -6,7 +6,7 @@ class LayoutView {
   private static $registerURL = "register";
   
   
-  public function render($isLoggedIn, LoginView $loginView, DateTimeView $dateTimeView, RegisterView $registerView) {
+  public function render($isLoggedIn, LoginView $loginView, DateTimeView $dateTimeView, RegisterView $registerView, NavigationView $navigationView) {
     
     echo '<!DOCTYPE html>
       <html>
@@ -16,9 +16,9 @@ class LayoutView {
         </head>
         <body>
           <h1>Assignment 4</h1>
-          ' . $this -> showNavigationLink($isLoggedIn) . '
+          ' . $navigationView -> renderNavigationLink() . '
           ' . $this -> renderIsLoggedIn($isLoggedIn) . '
-          ' . $this -> showForm($isLoggedIn, $loginView, $registerView) . '
+          ' . $this -> renderForm($isLoggedIn, $loginView, $registerView, $navigationView) . '
           
           <div class="container">
               
@@ -40,26 +40,11 @@ class LayoutView {
       return '<h2>Not logged in</h2>';
     }
   }
-  
-  // Set correct navigation link and name depending on in which view the user is.
-  private function showNavigationLink($isLoggedIn) {
-    
-    if (!$isLoggedIn && $_SERVER['QUERY_STRING'] != self::$registerURL) {
-      
-      return ' <a href="/?'. self::$registerURL .'" name="' . self::$registerUserLink . '">Register a new user</a> ';
-      
-    } else if (!$isLoggedIn && $_SERVER['QUERY_STRING'] == self::$registerURL) {
-      
-      return ' <a href="/?">Back to login</a> ';
-    }
-    
-    return null;
-  }
     
   // Check the url-string and show the correct HTML-form.
-  private function showForm($isLoggedIn, $loginView, $registerView) {
+  private function renderForm($isLoggedIn, $loginView, $registerView, $navigationView) {
     
-    if ($_SERVER['QUERY_STRING'] == self::$registerURL) {
+    if ($_SERVER['QUERY_STRING'] == $navigationView -> getRegisterURL()) {
       
       return $registerView -> response($isLoggedIn);
   

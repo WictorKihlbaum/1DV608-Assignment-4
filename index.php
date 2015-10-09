@@ -7,6 +7,7 @@ require_once('view/LoginView.php');
 require_once('view/DateTimeView.php');
 require_once('view/LayoutView.php');
 require_once('view/RegisterView.php');
+require_once('view/NavigationView.php');
 
 // Controllers.
 require_once('controller/LoginController.php');
@@ -42,6 +43,7 @@ $loginView = new LoginView($loginModel);
 $dateTimeView = new DateTimeView();
 $layoutView = new LayoutView();
 $registerView = new RegisterView($registerModel);
+$navigationView = new NavigationView();
 
 // CREATE OBJECTS OF THE CONTROLLERS
 $loginController = new LoginController($loginView, $loginModel);
@@ -52,7 +54,7 @@ $isLoggedIn = $loginController -> verifyUserState();
 $registerController -> verifyUserState();
 
 // Render page.
-$layoutView -> render($isLoggedIn, $loginView, $dateTimeView, $registerView);
+$layoutView -> render($isLoggedIn, $loginView, $dateTimeView, $registerView, $navigationView);
 
 // Dev purpose.
 $textFile = './Users/RegisteredUsers.txt';

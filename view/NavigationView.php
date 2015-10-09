@@ -2,26 +2,40 @@
 
 class NavigationView {
     
+    private static $registerUserLink = "NavigationView::RegisterUserLink";
     private static $registerURL = "register";
     
     
-    public function getLinkToGoBack() {
+    public function renderNavigationLink() {
+        
+        if (!$this -> userWantsToRegister()) {
+            
+             return $this -> getLinkToRegisterForm();
+            
+        } else {
+            
+            return $this -> getLinkToGoBack();
+        }
+    }
+    
+    private function getLinkToRegisterForm() {
+	    
+	    return '<a href="?' . self::$registerURL . '" name="' . self::$registerUserLink . '">Register a new user</a>';
+ 	}
+    
+    private function getLinkToGoBack() {
         
 		return "<a href='?'>Back to login</a>";
 	}
 	
-	public function getURLToRegisterForm() {
-	    
-		return "?" . self::$registerURL; // maybe have to change this.
-	}
-	
-	public function userWantsToRegister() {
+	private function userWantsToRegister() {
 	    
 	    return isset($_GET[self::$registerURL]);
 	}
 	
-	public function getLinkToRegisterForm() {
+	public function getRegisterURL() {
 	    
-	    return '<a href="?' . self::$registerURL . '">Register a new user</a>';
- 	}
+	    return self::$registerURL;
+	}
+	
 }
