@@ -168,11 +168,11 @@ class LoginView {
 		return "";
 	}
 
-	/*public function reloadPage() {
+	public function reloadPage() {
 		
 		header('Location: ' . $_SERVER['REQUEST_URI']);
 		exit();
-	}*/
+	}
 	
 	private function setFeedbackMessage($feedbackMessage) {
 		

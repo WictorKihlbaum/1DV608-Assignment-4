@@ -49,13 +49,13 @@ class RegisterView {
 					<legend>Register a new user - Write username and password</legend>
 					<p id="'. self::$messageId .'">'. $message .'</p>
 					
-					<label for="'. self::$userName .'">Username: </label>
+					<label for="'. self::$userName .'">Username :</label>
 					<input type="text" id="'. self::$userName .'" name="'. self::$userName .'" value="'. $this -> fillInUserName() .'" /><br>
 					
-					<label for="'. self::$password .'">Password: </label>
+					<label for="'. self::$password .'">Password :</label>
 					<input type="password" id="'. self::$password .'" name="'. self::$password .'" /><br>
 					
-					<label for="'. self::$passwordRepeat .'">Repeat password: </label>
+					<label for="'. self::$passwordRepeat .'">Repeat password :</label>
 					<input type="password" id="'. self::$passwordRepeat .'" name="'. self::$passwordRepeat .'" /><br>
 					
 					<input type="submit" name="'. self::$register .'" value="Register" />

@@ -5,6 +5,7 @@ class RegisterController {
     private $registerView;
     private $registerModel;
     private $navigationView;
+    private $loginView;
     
     
     public function __construct($registerView, $registerModel, $navigationView, $loginView) {
@@ -45,8 +46,8 @@ class RegisterController {
             if ($newUser != null) {
                 
                 $this -> registerModel -> validateUserInput($newUser);
-                //$this -> loginView -> setRegisteredNewUserFeedbackMessage();
                 $this -> navigationView -> navigateToIndexURL();
+                //$this -> loginView -> setRegisteredNewUserFeedbackMessage();
             }
   
         } catch (UserAlreadyExistsException $e) {
