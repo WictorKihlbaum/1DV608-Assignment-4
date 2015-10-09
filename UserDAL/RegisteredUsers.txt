@@ -1,4 +1,0 @@
-
-Username: Admin Password: Password
-Username: Wictor Password: hejsan
-Username: Wictor Password: halloj

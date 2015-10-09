@@ -102,8 +102,6 @@ class LoginView {
 	
 	private function fillInUserName() {
 		
-		var_dump($this -> sessionModel -> isNewRegisteredUserSessionSet());
-		
 		if ($this -> sessionModel -> isNewRegisteredUserSessionSet()) {
 			
 			return $this -> sessionModel -> getNewUserNameSession();
