@@ -12,6 +12,7 @@ class RegisterView {
 	
 	// '$feedbackMessage' will get one of the below values depending on situation. 
 	private $feedbackMessage = "";
+	
 	// Feedback messages.
 	private static $registeredNewUserMessage = "Registered new user.";
 	private static $noCredentialsMessage = "Username has too few characters, at least 3 characters.<br>Password has too few characters, at least 6 characters.";
@@ -29,27 +30,15 @@ class RegisterView {
 	}
 	
 	public function response($isLoggedIn) {
+			
+		$message = "";
 		
-		try {
+		if (!$isLoggedIn) {
 			
-			$message = "";
-		
-			if (!$isLoggedIn) {
-				
-				$message = $this -> getFeedbackMessage();
-				$response = $this -> generateRegisterFormHTML($message);
-				
-				return $response;
-				
-			} else {
-				
-				throw new \RegisterWhileLoggedInException();
-			}
-			
-		} catch (RegisterWhileLoggedInException $e) {
-			
-			$this -> setRegisterWhileLoggedInFeedbackMessage();
 			$message = $this -> getFeedbackMessage();
+			$response = $this -> generateRegisterFormHTML($message);
+			
+			return $response;
 		}
 	}
     
@@ -129,12 +118,12 @@ class RegisterView {
 				
 				throw new \NoCredentialsException();
 				
-			} else if ($this -> getRequestUserName() == "" || // Empty or invalid username.
+			} else if ($this -> getRequestUserName() == "" || // Empty,to short or invalid username.
 				strlen($this -> getRequestUserName()) < 3) {
 
 				throw new \NoValidUserNameException();
 			
-			} else if ($this -> getRequestPassword() == "" || // Empty or invalid password.
+			} else if ($this -> getRequestPassword() == "" || // Empty, to short or invalid password.
 				strlen($this -> getRequestPassword()) < 6) {
 
 				throw new \NoValidPasswordException();
@@ -143,7 +132,7 @@ class RegisterView {
 				
 				throw new \PasswordsDoNotMatchException();
 				
-			} else if (!ctype_alnum($this -> getRequestUserName()) && // Invalid username chars.
+			} else if (!ctype_alnum($this -> getRequestUserName()) && // Invalid username characters.
 				$this -> getRequestUserName() != "") {
 				
 				throw new \InvalidCharactersException();
