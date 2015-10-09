@@ -25,8 +25,9 @@ class RegisterModel {
         } else {
             
             $this -> saveNewUserToTextFile($newUser);
-            $this -> sessionModel -> setNewRegisteredUserSession($newUser -> getUserName());
-            //$this -> sessionModel -> setNewUserNameSession($newUser -> getUserName());
+            
+            $this -> sessionModel -> setNewRegisteredUserSession();
+            $this -> sessionModel -> setNewUserNameSession($newUser -> getUserName());
         }
     }
     

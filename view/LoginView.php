@@ -102,9 +102,9 @@ class LoginView {
 	
 	private function fillInUserName() {
 		
-		if ($this -> sessionModel -> isNewRegisteredUserSessionSet()) {
+		if ($this -> sessionModel -> isNewUserNameSessionSet()) {
 			
-			return $this -> sessionModel -> getNewRegisteredUserSession();
+			return $this -> sessionModel -> getNewUserNameSession();
 			
 		} else {
 			

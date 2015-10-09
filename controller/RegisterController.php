@@ -5,15 +5,13 @@ class RegisterController {
     private $registerView;
     private $registerModel;
     private $navigationView;
-    private $loginView;
     
     
-    public function __construct($registerView, $registerModel, $navigationView, $loginView) {
+    public function __construct($registerView, $registerModel, $navigationView) {
         
         $this -> registerView = $registerView;
         $this -> registerModel = $registerModel;
         $this -> navigationView = $navigationView;
-        $this -> loginView = $loginView;
     }
     
     public function verifyUserState() {
@@ -47,7 +45,6 @@ class RegisterController {
                 
                 $this -> registerModel -> validateUserInput($newUser);
                 $this -> navigationView -> navigateToIndexURL();
-                //$this -> loginView -> setRegisteredNewUserFeedbackMessage();
             }
   
         } catch (UserAlreadyExistsException $e) {

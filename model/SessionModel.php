@@ -4,13 +4,15 @@ class SessionModel {
     
     private static $userSession = "SessionModel::UserSession";
     private static $newRegisteredUserSession = "SessionModel::NewRegisteredUserSession";
-    //private static $newUserNameSession = "SessionModel::NewUserNameSession";
+    private static $newUserNameSession = "SessionModel::NewUserNameSession";
     
     
     public function __construct() {
         // Start the session as first thing to do when 'SessionModel' is being created. 
         session_start();
     }
+    
+    // SESSIONS FOR USER.
     
     public function setUserSession() {
         // This will keep track on whether the user is logged in or not.
@@ -32,9 +34,11 @@ class SessionModel {
         return false;
     }
     
-    public function setNewRegisteredUserSession($newUserName) {
+    // SESSIONS FOR NEW REGISTERED USER. 
+    
+    public function setNewRegisteredUserSession() {
         
-        $_SESSION[self::$newRegisteredUserSession] = $newUserName;
+        $_SESSION[self::$newRegisteredUserSession] = true;
     }
     
     public function unsetNewRegisteredUserSession() {
@@ -47,19 +51,22 @@ class SessionModel {
         return isset($_SESSION[self::$newRegisteredUserSession]);
     }
     
-    public function getNewRegisteredUserSession() {
-        
-        return $_SESSION[self::$newRegisteredUserSession];
-    }
     
-    /*public function isNewUserNameSessionSet() {
-        
-        return isset($_SESSION[self::$newUserNameSession]);
-    }
+    // SESSIONS FOR USERNAME.
     
     public function setNewUserNameSession($newUserName) {
         
         $_SESSION[self::$newUserNameSession] = $newUserName;
+    }
+    
+    public function unsetNewUserNameSession() {
+        
+        unset($_SESSION[self::$newUserNameSession]);
+    }
+    
+    public function isNewUserNameSessionSet() {
+        
+        return isset($_SESSION[self::$newUserNameSession]);
     }
     
     public function getNewUserNameSession() {
@@ -67,9 +74,5 @@ class SessionModel {
         return $_SESSION[self::$newUserNameSession];
     }
     
-    public function unsetNewUserNameSession() {
-        
-        unset($_SESSION[self::$newUserNameSession]);
-    }*/
     
 }

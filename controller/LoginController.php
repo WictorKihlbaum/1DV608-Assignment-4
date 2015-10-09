@@ -19,6 +19,7 @@ class LoginController {
         if ($this -> sessionModel -> isNewRegisteredUserSessionSet()) {
             
             $this -> loginView -> setRegisteredNewUserFeedbackMessage();
+            $this -> sessionModel -> unsetNewRegisteredUserSession();
         }
         
         // If user's not already logged in - login user.
@@ -47,6 +48,7 @@ class LoginController {
                 
                 $this -> loginModel -> validateUserInput($user);
                 $this -> loginView -> setLoginFeedbackMessage();
+                $this -> sessionModel -> unsetNewUserNameSession();
             }
   
         } catch (WrongInputException $e) {

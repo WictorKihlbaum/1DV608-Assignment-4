@@ -49,7 +49,7 @@ $navigationView = new NavigationView();
 
 // CREATE OBJECTS OF THE CONTROLLERS
 $loginController = new LoginController($loginView, $loginModel, $sessionModel);
-$registerController = new RegisterController($registerView, $registerModel, $navigationView, $loginView);
+$registerController = new RegisterController($registerView, $registerModel, $navigationView);
 
 // Verify whether user is logged in or not.
 $isLoggedIn = $loginController -> verifyUserState();
@@ -57,6 +57,3 @@ $registerController -> verifyUserState();
 
 // Render page.
 $layoutView -> render($isLoggedIn, $loginView, $dateTimeView, $registerView, $navigationView);
-
-// Dev purpose.
-//var_dump(file_get_contents($registeredUsersFile)); 
