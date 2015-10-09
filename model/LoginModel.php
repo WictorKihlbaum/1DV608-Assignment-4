@@ -3,12 +3,13 @@
 class LoginModel {
 
     private $sessionModel;
-    private $registeredUsersFile = './Users/RegisteredUsers.txt';
+    private $registeredUsersFile;
     
     
-    public function __construct($sessionModel) {
+    public function __construct($sessionModel, $registeredUsersFile) {
         
         $this -> sessionModel = $sessionModel;
+        $this -> registeredUsersFile = $registeredUsersFile;
     }
 
     public function validateUserInput($user) {

@@ -33,10 +33,12 @@ require_once('Exceptions/RegisterWhileLoggedInException.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
+$registeredUsersFile = './UserDAL/RegisteredUsers.txt'; // This should actually be put outside root-catalogue.
+
 // CREATE OBJECTS OF THE MODELS
 $sessionModel = new SessionModel();
-$loginModel = new LoginModel($sessionModel);
-$registerModel = new RegisterModel();
+$loginModel = new LoginModel($sessionModel, $registeredUsersFile);
+$registerModel = new RegisterModel($registeredUsersFile);
 
 // CREATE OBJECTS OF THE VIEWS
 $loginView = new LoginView($loginModel);
@@ -57,5 +59,4 @@ $registerController -> verifyUserState();
 $layoutView -> render($isLoggedIn, $loginView, $dateTimeView, $registerView, $navigationView);
 
 // Dev purpose.
-$textFile = './Users/RegisteredUsers.txt';
-var_dump(file_get_contents($textFile)); 
+var_dump(file_get_contents($registeredUsersFile)); 

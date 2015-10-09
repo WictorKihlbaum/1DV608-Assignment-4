@@ -4,9 +4,9 @@ class RegisterController {
     
     private $registerView;
     private $registerModel;
-    private $loginView;
-    private $loginModel;
-    private $registeredUsersFile = './Users/RegisteredUsers.txt';
+    private $loginView; // Do I use this??
+    private $loginModel; // Do I need to use this??
+    //private $registeredUsersFile = './UserDAL/RegisteredUsers.txt';
     
     
     public function __construct($registerView, $registerModel, $loginView, $loginModel) {
@@ -47,7 +47,6 @@ class RegisterController {
             if ($newUser != null) {
                 
                 $this -> registerModel -> validateUserInput($newUser);
-                $this -> saveNewUserToTextFile($newUser);
                 $this -> registerView -> setRegisteredNewUserFeedbackMessage();
             }
   
@@ -55,16 +54,6 @@ class RegisterController {
             
             $this -> registerView -> setUserAlreadyExistsFeedbackMessage();
         }
-    }
-    
-    private function saveNewUserToTextFile($newUser) {
-                
-        // Open the file to get existing content.
-        $fileContent = file_get_contents($this -> registeredUsersFile);
-        // Save new user to the textfile.
-        $fileContent .= "\nUsername: " . $newUser -> getUserName() . " Password: " . $newUser -> getPassword();
-        // Write the content back to the textfile.
-        file_put_contents($this -> registeredUsersFile, $fileContent);
     }
     
 }
