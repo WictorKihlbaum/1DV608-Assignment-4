@@ -104,7 +104,7 @@ class LoginView {
 		
 		if ($this -> sessionModel -> isNewRegisteredUserSessionSet()) {
 			
-			return $this -> sessionModel -> getNewUserNameSession();
+			return $this -> sessionModel -> getNewRegisteredUserSession();
 			
 		} else {
 			

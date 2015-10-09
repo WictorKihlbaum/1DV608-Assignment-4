@@ -19,8 +19,6 @@ class LoginController {
         if ($this -> sessionModel -> isNewRegisteredUserSessionSet()) {
             
             $this -> loginView -> setRegisteredNewUserFeedbackMessage();
-            $this -> sessionModel -> unsetNewRegisteredUserSession();
-            $this -> sessionModel -> unsetNewUserNameSession();
         }
         
         // If user's not already logged in - login user.

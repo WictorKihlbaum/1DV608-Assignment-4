@@ -66,8 +66,7 @@ class RegisterView {
 	
 	private function fillInUserName() {
 		// This will also format the username if it contains any invalid characters.
-		//return preg_replace('/[^a-zA-Z0-9\s]/', '', $this -> getRequestUserName());
-		return trim($this -> getRequestUserName(), '');
+		return preg_replace('/[^a-zA-Z0-9\s]/', '', $this -> getRequestUserName());
 	}
 	
 	public function didUserPressRegister() {
