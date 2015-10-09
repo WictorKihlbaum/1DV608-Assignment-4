@@ -36,9 +36,9 @@ class RegisterView {
 			
 			$message = $this -> getFeedbackMessage();
 			$response = $this -> generateRegisterFormHTML($message);
+			
+			return $response;
 		}
-		
-		return $response;
 	}
     
     private function generateRegisterFormHTML($message) {
