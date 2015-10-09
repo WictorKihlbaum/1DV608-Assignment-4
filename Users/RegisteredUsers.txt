@@ -1,9 +1,2 @@
 
 Username: Admin Password: Password
-Username: Wictor Password: Password
-Username: Calle Password: Password
-Username: Callehej Password: password
-Username: Tjosan Password: hejsan
-Username: Tjosan Password: HALLOJ
-Username: Wicce Password: hejsan
-Username: Hej Password: hejsan
